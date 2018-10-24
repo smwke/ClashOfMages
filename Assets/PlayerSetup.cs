@@ -16,7 +16,7 @@ public class PlayerSetup : NetworkBehaviour {
         }
         else
         {
-            PlayerManager.instance.player = transform;
+            //PlayerManager.instance.player = transform;
         }
 	}
 	
