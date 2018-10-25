@@ -24,21 +24,13 @@ public class ThirdPersonCamera : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () {
-
-    
-        
+	void LateUpdate () { 
             RotateAroundTarget();
-        
-        
 	}
     void RotateAroundTarget()
     {
         yaw += Input.GetAxisRaw("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
-
-
-       
 
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
 
