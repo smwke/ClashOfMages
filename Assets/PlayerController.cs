@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     Transform _camera;
+    [SerializeField]
+    ParticleSystem slash;
 
     CharacterController controller;
     Animator anim;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = true;
         anim.SetBool("Attack", isAttacking);
         anim.SetLayerWeight(1, 1);
+        slash.Play();
     }
     public void AttackDone()
     {
