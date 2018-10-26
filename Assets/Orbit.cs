@@ -5,7 +5,7 @@ using UnityEngine;
 public class Orbit : MonoBehaviour
 {
     [SerializeField]
-    Transform target; float speed = 100f;
+    Transform target;
 
     [SerializeField]
     float rotspeed = 1f;
