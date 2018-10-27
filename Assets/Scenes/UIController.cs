@@ -4,7 +4,7 @@ public class UIController : MonoBehaviour {
     public Image currentHealthbar;
     public Text ratioText;
 
-    public Unit target;
+    Unit target;
 
     float health,maxHealth;
 

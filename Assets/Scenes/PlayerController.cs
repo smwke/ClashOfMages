@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Animator anim;
 
-    float vInput, hInput;
+    float vInput, hInput, timer = 0f;
     bool isWalking = false, isAttacking = false;
 
     void Start()
@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour
         vInput = Input.GetAxisRaw("Vertical");
         hInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetMouseButton(0) && !isAttacking) Attack(); 
+        timer += Time.deltaTime;
+
+        if (Input.GetMouseButton(0) && !isAttacking && timer >= 3) Attack(); 
 
         Rotate(); // get rotation vector and set the walking bool to true if we are moving /
         Move(); // moves the character according to previous booleans /
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Attack", isAttacking);
         anim.SetLayerWeight(1, 1);
         slash.Play();
+        timer = 0f;
     }
     public void AttackDone()
     {
