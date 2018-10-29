@@ -14,11 +14,20 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Animator anim;
 
+    public GameObject[] spells;
+    Spell[] spellObj = new Spell[4];
+
     float vInput, hInput, timer = 0f;
     bool isWalking = false, isAttacking = false;
 
     void Start()
     {
+        foreach(var spell in spells)
+        {
+            var obj = Instantiate(spell, transform);
+            spellObj[0] = obj.gameObject.GetComponent<Spell>();
+        }
+
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         thisUnit = GetComponent<Unit>();
@@ -31,14 +40,31 @@ public class PlayerController : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && !isAttacking && timer >= 3) Attack(); 
+        if (Input.GetMouseButton(0) && !isAttacking && timer >= 3) Attack();
 
+        Spells(); // gets spell casting input /
         Rotate(); // get rotation vector and set the walking bool to true if we are moving /
         Move(); // moves the character according to previous booleans /
 
 
 
         ///if (isWalking) controller.Move(transform.forward * Time.deltaTime * moveSpeed); /
+    }
+    void Spells()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            CastSpell(0);
+        }
+    }
+    void CastSpell(int id)
+    {
+        if (timer >= spellObj[id].coolDown)
+        {
+            Debug.Log("A spell should be succesfully casted!");
+            timer = 0f;
+            spellObj[id].CastSpell();
+        }
     }
     void Attack()
     {
